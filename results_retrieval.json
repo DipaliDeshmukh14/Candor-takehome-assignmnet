@@ -21,7 +21,7 @@
     "complete_record@10": 0.88,
     "complete_record@20": 0.96,
     "found_none@20": 0.0,
-    "mrr": 0.5374,
+    "mrr": 0.5441,
     "questions_with_forbidden@10": 0,
     "forbidden_retrieved@20": 0,
     "used_sources_fallback": 0,
@@ -284,7 +284,7 @@
       "complete_record@20": 1.0,
       "recall_unit@20": 1.0,
       "clean@20": 1.0,
-      "first_rank": 3,
+      "first_rank": 2,
       "score": 0.0
     },
     {
