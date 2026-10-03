@@ -35,7 +35,8 @@ SYNONYMS = {
     "fly":["flight","den"], "flying":["flight","den"], "flight":["fly","den"], "denver":["den"],
     "slip":["delay","moved","regression","geocoding"],
     "delay":["slip","regression"],
-    "sign":["signed","signing","contract"], "signed":["sign","signing"], "contract":["signed","signing"],
+    "sign":["signed","signing","contract","agreement","close","closes"],
+    "signed":["sign","signing"], "contract":["signed","signing"],
     "hire":["hiring","designer"], "hiring":["hire","designer"], "designer":["hire","hiring"],
     "sso":["okta","saml"], "dictate":["dictated","dictation"], "dictated":["dictate","dictation"],
 }
@@ -160,7 +161,7 @@ class Memory:
         for t in set(tokens(question)) | date_tokens(question):
             terms[t] = 1.0
             for syn in SYNONYMS.get(t, ()):
-                terms.setdefault(syn, 0.6)
+                terms.setdefault(syn, 0.75)
         return terms
 
     def retrieve(self, question, as_of, k=20):

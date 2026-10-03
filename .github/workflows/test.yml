@@ -1,0 +1,57 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run pipeline
+        run: ./run.sh
+
+      - name: Verify retrieval score
+        run: |
+          python3 -c "
+          import json
+          s = json.load(open('results_retrieval.json'))['summary']
+          score = s['score']['mean']
+          print('retrieval:', score)
+          assert score >= 0.8, f'retrieval dropped below 80%: {score}'
+          "
+
+      - name: Verify answers score
+        run: |
+          python3 -c "
+          import json
+          s = json.load(open('results_memory.json'))['summary']
+          score = s['strict']['mean']
+          print('answers strict:', score)
+          assert score >= 0.4, f'answers dropped below 40%: {score}'
+          "
+
+      - name: Verify actions score
+        run: |
+          python3 -c "
+          import json
+          s = json.load(open('results_actions.json'))['summary']
+          score = s['pass_rate']
+          print('actions pass:', score)
+          assert score >= 0.9, f'actions dropped below 90%: {score}'
+          "
+
+      - name: Check no hard failures
+        run: |
+          python3 -c "
+          import json
+          s = json.load(open('results_memory.json'))['summary']
+          print('hard failures:', s['hard_failures'])
+          assert s['hard_failures'] == 0, 'hard rule broken'
+          "
