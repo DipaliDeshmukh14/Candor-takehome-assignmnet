@@ -61,7 +61,6 @@ Zero hard failures = no time leaks, no deleted records cited, no secrets repeate
     actions.py        command parser
     report.py         runs everything, prints a summary
     assistant.py      interactive chat interface
-    vibe.py           answers + a fun follow-up
     explain.py        shows why it picked an answer
     run.sh            one command
 
