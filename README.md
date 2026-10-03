@@ -8,7 +8,11 @@ Two weeks of Alex Rivera's work life → searchable memory. Ask it stuff, it ans
 
 No API keys. No pip install. No models. Just Python 3.10+.
 
-## the vibe
+## architecture
+
+Two files do the real work. Everything else is extras.
+
+### the vibe
 
 `solution.py` — the brain. Reads every record (meetings, Slack, email, dictation, calendar, Codex, ChatGPT). Builds a keyword index. When you ask a question it:
 
